@@ -4,18 +4,36 @@ import { cn } from '../../lib/utils'
 import { PostCard } from './PostCard'
 import { PostComposer } from './PostComposer'
 
-export function GlobalFeed() {
-  const { posts, communities } = useApp()
-  const [filter, setFilter] = useState<'all' | 'joined'>('all')
-  const joinedIds = new Set(communities.filter((community) => community.joined).map((community) => community.id))
-  const visiblePosts = filter === 'all' ? posts : posts.filter((post) => !post.communityId || joinedIds.has(post.communityId))
+const tabs = ['For you', 'Following', 'Communities'] as const
 
-  return <div className="mx-auto max-w-2xl space-y-5">
-    <div><h1 className="text-3xl font-bold text-slate-950">Community feed</h1><p className="mt-1 text-slate-600">Updates from people and spaces around you.</p></div>
-    <PostComposer />
-    <div className="flex gap-2 border-b border-slate-200">
-      {(['all', 'joined'] as const).map((item) => <button key={item} onClick={() => setFilter(item)} className={cn('border-b-2 px-3 py-2 text-sm font-semibold capitalize', filter === item ? 'border-teal-700 text-teal-800' : 'border-transparent text-slate-500')}>{item === 'joined' ? 'My communities' : 'For you'}</button>)}
+export function GlobalFeed() {
+  const { posts } = useApp()
+  const [activeTab, setActiveTab] = useState(0)
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Header + Tabs */}
+      <div className="flex flex-col gap-4">
+        <h1 className="font-heading text-[26px] font-semibold leading-[34px] tracking-tight text-on-surface">Global Feed</h1>
+        <div role="tablist" className="flex items-center gap-6 border-b border-border">
+          {tabs.map((tab, i) => (
+            <button key={tab} role="tab" aria-selected={i === activeTab} onClick={() => setActiveTab(i)}
+              className={cn('pb-3 border-b-2 -mb-px text-sm font-medium transition-colors',
+                i === activeTab ? 'border-primary text-primary' : 'border-transparent text-on-surface-muted hover:text-on-surface'
+              )}>
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Composer */}
+      <PostComposer />
+
+      {/* Posts */}
+      <div className="flex flex-col gap-4">
+        {posts.map((post) => <PostCard key={post.id} post={post} />)}
+      </div>
     </div>
-    {visiblePosts.map((post) => <PostCard key={post.id} post={post} />)}
-  </div>
+  )
 }

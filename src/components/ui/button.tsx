@@ -3,16 +3,17 @@ import type { ButtonHTMLAttributes } from 'react'
 import { cn } from '../../lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-xl text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 rounded-[8px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50',
   { variants: {
     variant: {
-      default: 'bg-teal-700 text-white hover:bg-teal-800',
-      secondary: 'bg-teal-50 text-teal-800 hover:bg-teal-100',
-      outline: 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50',
-      ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
-      danger: 'bg-red-50 text-red-700 hover:bg-red-100',
+      default: 'bg-primary text-on-primary hover:bg-primary-hover',
+      secondary: 'bg-primary-tint text-on-primary-tint hover:bg-primary hover:text-on-primary',
+      outline: 'border border-border-strong bg-surface text-on-surface hover:bg-surface-subtle',
+      ghost: 'text-on-surface-muted hover:bg-surface-subtle hover:text-on-surface',
+      danger: 'bg-error-tint text-error hover:bg-error hover:text-on-primary',
+      terracotta: 'border border-terracotta bg-surface text-terracotta-text',
     },
-    size: { default: 'h-10 px-4', sm: 'h-9 px-3', icon: 'size-10' },
+    size: { default: 'h-10 px-4', sm: 'h-9 px-3 text-xs', icon: 'size-10' },
   }, defaultVariants: { variant: 'default', size: 'default' } },
 )
 

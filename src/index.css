@@ -1,7 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-body: "DM Sans", sans-serif;
+
+  --color-background: #FAF7F2;
+  --color-on-background: #2B2622;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F3EFE8;
+  --color-on-surface: #2B2622;
+  --color-on-surface-muted: #6F675E;
+  --color-on-surface-subtle: #6F675E;
+  --color-border: #E7E0D6;
+  --color-border-strong: #D5CCC0;
+  --color-primary: #2F6B4F;
+  --color-on-primary: #FFFFFF;
+  --color-primary-hover: #245640;
+  --color-primary-tint: #E4F0E9;
+  --color-on-primary-tint: #1E4633;
+  --color-terracotta: #D9734E;
+  --color-on-terracotta: #2B2622;
+  --color-terracotta-tint: #F9ECE6;
+  --color-on-terracotta-tint: #8F3F23;
+  --color-terracotta-text: #9A3F1F;
+  --color-error: #B43C2E;
+  --color-error-tint: #FBEAE8;
 }
 
 * {
@@ -9,9 +32,9 @@
 }
 
 html {
-  color: #0f172a;
-  background: #f8fafc;
-  font-family: var(--font-sans);
+  color: var(--color-on-surface);
+  background: var(--color-background);
+  font-family: var(--font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,8 +46,7 @@ body {
   min-height: 100vh;
 }
 
-button,
-a {
+button, a {
   -webkit-tap-highlight-color: transparent;
 }
 
