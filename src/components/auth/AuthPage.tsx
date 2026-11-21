@@ -8,7 +8,7 @@ import { Card, fieldClass } from '../ui/primitives'
 export function AuthPage() {
   const { user, login, signUp } = useAuth()
   const [mode, setMode] = useState<'login' | 'signup'>('login')
-  const [form, setForm] = useState({ name: '', username: '', email: '', password: '' })
+  const [form, setForm] = useState({ name: '', username: '', email: '', password: '', confirmPassword: '' })
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
@@ -19,6 +19,7 @@ export function AuthPage() {
     try {
       if (mode === 'login') await login({ email: form.email, password: form.password })
       else {
+        if (form.password !== form.confirmPassword) throw new Error('Passwords do not match')
         const signedIn = await signUp(form)
         if (!signedIn) setNotice('Check your email to confirm your account, then sign in.')
       }
@@ -41,6 +42,7 @@ export function AuthPage() {
           {mode === 'signup' && <><label className="block text-sm font-medium">Full name<input required className={`${fieldClass} mt-1`} value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} /></label><label className="block text-sm font-medium">Username<input required minLength={3} className={`${fieldClass} mt-1`} value={form.username} onChange={(event) => setForm({ ...form, username: event.target.value.replace(/[^a-zA-Z0-9_]/g, '') })} /></label></>}
           <label className="block text-sm font-medium">Email<input required type="email" className={`${fieldClass} mt-1`} value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} /></label>
           <label className="block text-sm font-medium">Password<input required minLength={6} type="password" className={`${fieldClass} mt-1`} value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} /></label>
+          {mode === 'signup' && <label className="block text-sm font-medium">Confirm password<input required minLength={6} type="password" className={`${fieldClass} mt-1`} value={form.confirmPassword} onChange={(event) => setForm({ ...form, confirmPassword: event.target.value })} /></label>}
           {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}{notice && <p className="rounded-lg bg-[#E4F0E9] p-3 text-sm text-[#1E4633]">{notice}</p>}
           <Button className="w-full" disabled={busy}>{busy && <LoaderCircle className="size-4 animate-spin" />}{mode === 'login' ? 'Sign in' : 'Create account'}</Button>
         </form>
