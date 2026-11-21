@@ -11,7 +11,7 @@ export function LandingLayout() {
   return <div className="space-y-8">
     <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-teal-800 to-cyan-700 px-6 py-10 text-white sm:px-10">
       <Badge className="mb-4 bg-white/15 text-white"><Sparkles className="mr-1 size-3" /> Your community, connected</Badge>
-      <h1 className="max-w-2xl text-3xl font-bold tracking-tight sm:text-5xl">Welcome back, {member.name.split(' ')[0]}.</h1>
+      <h1 className="max-w-2xl text-3xl font-bold tracking-tight sm:text-5xl">Welcome back, {member?.name.split(' ')[0] ?? 'friend'}.</h1>
       <p className="mt-4 max-w-xl text-teal-50">Find your people, share what matters, and turn local ideas into meaningful action.</p>
       <div className="mt-7 flex flex-wrap gap-3">
         <Link to="/feed"><Button className="bg-white text-teal-800 hover:bg-teal-50">Explore your feed <ArrowRight className="size-4" /></Button></Link>

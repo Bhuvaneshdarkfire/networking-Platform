@@ -5,16 +5,25 @@ import { GlobalFeed } from './components/feed/GlobalFeed'
 import { CommunitySpace } from './components/feed/CommunitySpace'
 import { Discovery } from './components/discovery/Discovery'
 import { UserProfile } from './components/profile/UserProfile'
+import { AuthPage } from './components/auth/AuthPage'
+import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { MessagesPage } from './components/chat/MessagesPage'
+import { CommunitiesPage } from './components/discovery/CommunitiesPage'
 
 function App() {
   return <Routes>
-    <Route element={<AppShell />}>
-      <Route path="/" element={<LandingLayout />} />
-      <Route path="/feed" element={<GlobalFeed />} />
-      <Route path="/discover" element={<Discovery />} />
-      <Route path="/communities/:id" element={<CommunitySpace />} />
-      <Route path="/profile" element={<UserProfile />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+    <Route path="/auth" element={<AuthPage />} />
+    <Route element={<ProtectedRoute />}>
+      <Route element={<AppShell />}>
+        <Route path="/" element={<LandingLayout />} />
+        <Route path="/feed" element={<GlobalFeed />} />
+        <Route path="/discover" element={<Discovery />} />
+        <Route path="/communities" element={<CommunitiesPage />} />
+        <Route path="/communities/:id" element={<CommunitySpace />} />
+        <Route path="/messages" element={<MessagesPage />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
     </Route>
   </Routes>
 }

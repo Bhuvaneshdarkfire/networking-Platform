@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Fraunces", Georgia, serif;
 }
 
 * {
@@ -9,8 +11,8 @@
 }
 
 html {
-  color: #0f172a;
-  background: #f8fafc;
+  color: #2b2622;
+  background: #faf7f2;
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;

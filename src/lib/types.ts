@@ -3,6 +3,7 @@ export interface Member {
   name: string
   handle: string
   avatar: string
+  avatarUrl?: string
   bio: string
   location: string
   interests: string[]
@@ -34,6 +35,7 @@ export interface Community {
   description: string
   category: string
   cover: string
+  coverUrl?: string
   members: number
   joined: boolean
 }

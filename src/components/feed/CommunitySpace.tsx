@@ -1,4 +1,4 @@
-import { ArrowLeft, Users } from 'lucide-react'
+import { ArrowLeft, LoaderCircle, Users } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { useApp } from '../../context/AppContext'
 import { Button } from '../ui/button'
@@ -8,8 +8,9 @@ import { PostComposer } from './PostComposer'
 
 export function CommunitySpace() {
   const { id } = useParams()
-  const { communities, posts, toggleCommunity } = useApp()
+  const { communities, posts, toggleCommunity, loading } = useApp()
   const community = communities.find((item) => item.id === id)
+  if (loading) return <div className="grid min-h-64 place-items-center"><LoaderCircle className="animate-spin text-[#2F6B4F]" /></div>
   if (!community) return <Navigate to="/discover" replace />
   const communityPosts = posts.filter((post) => post.communityId === community.id)
 
